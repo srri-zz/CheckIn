@@ -31,23 +31,24 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText note = (EditText)findViewById(R.id.editText2);
-        EditText name = (EditText)findViewById(R.id.editText1);
-        Calendar c = Calendar.getInstance(); 
-        int seconds = c.get(Calendar.SECOND);
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://peer.to/checkin/get.php");
-        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-        pairs.add(new BasicNameValuePair("users_name", name.getText().toString()));
-        pairs.add(new BasicNameValuePair("note", note.getText().toString()));
-        pairs.add(new BasicNameValuePair("device_version", Build.VERSION.RELEASE));
-        pairs.add(new BasicNameValuePair("device", Build.MODEL));
-        pairs.add(new BasicNameValuePair("manufacturer", Build.MANUFACTURER));
-        pairs.add(new BasicNameValuePair("time", String.valueOf(seconds)));
         Button btn = (Button) findViewById(R.id.button1);
         btn.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
+
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost("http://peer.to/checkin/get.php");
+            	List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            	EditText note = (EditText)findViewById(R.id.editText2);
+                EditText name = (EditText)findViewById(R.id.editText1);
+                Calendar c = Calendar.getInstance(); 
+            	int seconds = c.get(Calendar.SECOND);
+                pairs.add(new BasicNameValuePair("users_name", name.getText().toString()));
+                pairs.add(new BasicNameValuePair("note", note.getText().toString()));
+                pairs.add(new BasicNameValuePair("device_version", Build.VERSION.RELEASE));
+                pairs.add(new BasicNameValuePair("device", Build.MODEL));
+                pairs.add(new BasicNameValuePair("manufacturer", Build.MANUFACTURER));
+                pairs.add(new BasicNameValuePair("time", String.valueOf(seconds)));
             	try {
         			post.setEntity(new UrlEncodedFormEntity(pairs));
         		} catch (UnsupportedEncodingException e) {
