@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.EditText;
 
@@ -45,15 +46,18 @@ public class MainActivity extends Activity {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.d("UnsupportedEncodingException", null);
 		}
         try {
 			HttpResponse response = client.execute(post);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.d("ClientProtocolException", null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.d("IOException", null);
 		}
     }
 
