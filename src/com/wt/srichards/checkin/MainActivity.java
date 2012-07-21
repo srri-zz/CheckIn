@@ -20,6 +20,9 @@ import android.app.Activity;
 import android.os.Build;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
@@ -41,24 +44,31 @@ public class MainActivity extends Activity {
         pairs.add(new BasicNameValuePair("device", Build.MODEL));
         pairs.add(new BasicNameValuePair("manufacturer", Build.MANUFACTURER));
         pairs.add(new BasicNameValuePair("time", String.valueOf(seconds)));
-        try {
-			post.setEntity(new UrlEncodedFormEntity(pairs));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.d("UnsupportedEncodingException", null);
-		}
-        try {
-			HttpResponse response = client.execute(post);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.d("ClientProtocolException", null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.d("IOException", null);
-		}
+        Button btn = (Button) findViewById(R.id.button1);
+        btn.setOnClickListener(new OnClickListener() {
+
+            public void onClick(View v) {
+            	try {
+        			post.setEntity(new UrlEncodedFormEntity(pairs));
+        		} catch (UnsupportedEncodingException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        			Log.d("UnsupportedEncodingException", null);
+        		}
+                try {
+        			HttpResponse response = client.execute(post);
+        		} catch (ClientProtocolException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        			Log.d("ClientProtocolException", null);
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        			Log.d("IOException", null);
+        		}
+            }
+        });
+        
     }
 
     @Override
